@@ -17,22 +17,22 @@ public class Tile : MonoBehaviour {
 	}
 
 	public bool HasNorth() {
-		printSelf ();
+		//printSelf ();
 		return tileType.paths [(0 + (360 - yRotation) / 90) % 4];
 	}
 
 	public bool HasRight() {
-		printSelf ();
+		//printSelf ();
 		return tileType.paths [(1 + (360 - yRotation) / 90) % 4];
 	}
 
 	public bool HasDown() {
-		printSelf ();
+		//printSelf ();
 		return tileType.paths [(2 + (360 - yRotation) / 90) % 4];
 	}
 
 	public bool HasLeft() {
-		printSelf ();
+		//printSelf ();
 		return tileType.paths [(3 + (360 - yRotation) / 90) % 4];
 	}
 

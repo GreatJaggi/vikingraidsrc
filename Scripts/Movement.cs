@@ -27,11 +27,15 @@ public class Movement : MonoBehaviour {
 
 		count = 0;
 		//nodeTransform = GetNodeTransform(grid.GetTile(5, 5));
-		nodeTransform = GetNodeTransform(grid.GetTile(path.pathList[count].x, path.pathList[count].y));
+		//nodeTransform = GetNodeTransform(grid.GetTile(path.pathList[count].x, path.pathList[count].y));
+
+		nodeTransform = GetNodeTransform (grid.GetTile (grid.startTile.x, grid.startTile.y));
+		currentTile = grid.startTile;
 		//nodeTransform = GetNodeTransform (grid.GetTile(currentNode.x, currentNode.y -1)); // always going below start at first
 
 	}
 
+	Int2D currentTile = new Int2D();
 	public void Move()	{
 		Vector3 dir = nodeTransform.position - this.transform.localPosition;
 		float distThisFrame = speed * Time.deltaTime;
@@ -40,8 +44,16 @@ public class Movement : MonoBehaviour {
 		//if Reached
 		if (dir.magnitude < distThisFrame) {
 			count += 1;
-			nodeTransform = GetNodeTransform(grid.GetTile(path.pathList[count].x, path.pathList[count].y));
-			grid.GetTile (path.pathList [count].x, path.pathList [count].y).GetComponent<Tile> ().visited = true;
+
+			//nodeTransform = GetNodeTransform(grid.GetTile(path.pathList[count].x, path.pathList[count].y));
+			//nodeTransform = path.FindNextPath
+			grid.GetTile (currentTile.x, currentTile.y).GetComponent<Tile> ().visited = true;
+			print("Finding Next Path");
+			currentTile = path.FindNextPath(currentTile);
+			print ("DONE FINDING");
+			nodeTransform = GetNodeTransform(grid.GetTile(currentTile.x, currentTile.y));
+
+			//grid.GetTile (path.pathList [count].x, path.pathList [count].y).GetComponent<Tile> ().visited = true;
 
 			//Int2D possibleEndTile = new Int2D (path.pathList [count].x, path.pathList [count].y - 1);
 
